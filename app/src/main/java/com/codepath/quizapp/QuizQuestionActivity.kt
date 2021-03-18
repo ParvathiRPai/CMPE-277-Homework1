@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -25,11 +26,11 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mUserName=intent.getStringExtra(Constants.USER_NAME)
 
         mQuestionsList=Constants.getQuestions();
-
-
         setQuestion()
         tv_option_one.setOnClickListener(this)
         tv_option_two.setOnClickListener(this)
@@ -38,6 +39,13 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
         btn_submit.setOnClickListener(this)
 
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
+
 
     private fun setQuestion(){
         val question=mQuestionsList !! [mCurrentPosition-1]
